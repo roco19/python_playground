@@ -1,6 +1,6 @@
 # Python Playground 🐍
 
-A collection of my small Python projects, practice scripts, and code experiments.  
+A collection of small Python projects, practice scripts, and code experiments.  
 This repository serves as a personal space to explore new ideas, learn features, and build fun mini-apps.
 
 ## 📂 Repository Structure
