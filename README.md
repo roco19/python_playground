@@ -20,5 +20,9 @@ python-playground/
 │   ├── README.md
 │   └── ...
 │
+├── deep-learning/        # Neural networks, ML experiments, and AI model training
+│   ├── README.md
+│   └── ...
+│
 └── README.md              # This file
 ```
