@@ -1,11 +1,12 @@
 from pathlib import Path
 from fastai.learner import Learner
+from fastai.metrics import accuracy
 from fastai.vision.all import ImageDataLoaders, vision_learner, untar_data, URLs, get_image_files, Resize, resnet34, error_rate
 
 # Constants
 VALID_IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp", ".avif"}
 DEFAULT_IMAGE_SIZE = 100  # Recommended size: 224. But set to 100 for performance reasons
-DEFAULT_FINE_TUNING_EPOCHS = 0
+DEFAULT_FINE_TUNING_EPOCHS = 2
 VALIDATION_SPLIT = 0.2
 RANDOM_SEED = 42
 
@@ -26,7 +27,7 @@ def train_model(img_size: int = DEFAULT_IMAGE_SIZE, epochs: int = DEFAULT_FINE_T
         num_workers=0 # For Windows compatibility. Should I use Conda instead?
     )
 
-    learn = vision_learner(dls, resnet34, metrics=error_rate)
+    learn = vision_learner(dls, resnet34, metrics=error_rate, pretrained=True)
     learn.fine_tune(epochs)
     return learn
 
