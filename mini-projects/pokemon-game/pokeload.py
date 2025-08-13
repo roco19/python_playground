@@ -1,7 +1,5 @@
-import copy
 import pickle
 import random
-
 import requests_html
 
 

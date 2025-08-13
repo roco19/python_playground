@@ -1,7 +1,8 @@
 from pathlib import Path
 from fastai.learner import Learner
-from fastai.metrics import accuracy
-from fastai.vision.all import ImageDataLoaders, vision_learner, untar_data, URLs, get_image_files, Resize, resnet34, error_rate
+from fastai.vision.all import (
+    ImageDataLoaders, vision_learner, untar_data, URLs, get_image_files, Resize, resnet34, error_rate
+)
 
 # Constants
 VALID_IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp", ".avif"}
