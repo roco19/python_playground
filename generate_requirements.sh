@@ -6,13 +6,21 @@ pipreqs . --force --encoding utf-8 --mode no-pin --ignore .venv,__pycache__,.git
 
 if [ $? -eq 0 ]; then
     echo "✅ Generated requirements.in"
-    
+
     echo "🔒 Compiling locked requirements..."
-    pip-compile requirements.in
-    
+    pip-compile --strip-extras --quiet requirements.in
+
     if [ $? -eq 0 ]; then
-        echo "✅ Generated requirements.txt"
-        echo "📊 Summary:"
+        echo "📝 Adding CUDA support warning..."
+
+        # Add CUDA warning after the pip-compile header
+        sed -i "1i\
+# CUDA SUPPORT: If you have an NVIDIA GPU, install PyTorch with CUDA support:\n\
+# pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118\n\
+# For other CUDA versions: https://pytorch.org/get-started/locally/" requirements.txt
+
+        echo "✅ Generated requirements.txt with CUDA warning"
+        echo "Summary:"
         echo "   requirements.in:  $(wc -l < requirements.in) packages"
         echo "   requirements.txt: $(grep -c '^[^#]' requirements.txt) packages"
     else

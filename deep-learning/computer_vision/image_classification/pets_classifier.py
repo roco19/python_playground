@@ -34,7 +34,7 @@ def train_model(img_size: int = DEFAULT_IMAGE_SIZE, epochs: int = DEFAULT_FINE_T
 
 def use_model(learn: Learner) -> None:
     """ Use the model to classify custom images of dogs and cats """
-    test_dir = Path(__file__).parent / 'test_images'
+    test_dir = Path(__file__).parent / 'test_img/pets'
     if test_dir.exists():
         for img_path in test_dir.glob('*'):
             if img_path.suffix.lower() in [".jpg", ".png", ".webp", ".avif"]:
