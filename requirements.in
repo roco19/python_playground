@@ -1,6 +1,9 @@
 fastai
+huggingface_hub
 Pillow
+python-dotenv
 pyttsx3
 readchar
 requests_html
 speechrecognition
+torch

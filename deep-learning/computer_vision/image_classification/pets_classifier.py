@@ -1,4 +1,7 @@
+import os
 import torch
+from dotenv import load_dotenv
+from huggingface_hub import push_to_hub_fastai
 from pathlib import Path
 from fastai.learner import Learner, load_learner
 from fastai.vision.all import (
@@ -11,10 +14,14 @@ DEFAULT_IMAGE_SIZE = 224  # Recommended size: 224
 DEFAULT_FINE_TUNING_EPOCHS = 4
 VALIDATION_SPLIT = 0.2
 RANDOM_SEED = 42
-FORCE_CPU_ONLY_MODEL = False # Set to True for HuggingFace deployment
+FORCE_CPU_ONLY_MODEL = False # Set to True for Hugging Face deployment
 TRAINED_MODELS_PATH = Path(__file__).parent / "trained_models"
 MODEL_CPU_ONLY_FILENAME = f"cpu-{Path(__file__).stem}_model.pkl"
 MODEL_FILENAME = f"{Path(__file__).stem}_model.pkl"
+
+# Constants to upload model to Hugging Face
+EXPORT_TO_HUGGING_FACE = False
+REPO_URL = "roco19/resnet34-cats-vs-dogs-ft"
 
 
 def is_cat(filename: str) -> str:
@@ -73,9 +80,27 @@ def use_model(learn: Learner) -> None:
                 prediction, prediction_index, probs = learn.predict(img_path)
                 print(f"{img_path.name}: {prediction:4} (confidence: {probs[prediction_index]:.5f})")
 
+def export_to_hugging_face(learn: Learner):
+    try:
+        print(os.getenv('HUGGINGFACE_TOKEN'))
+        load_dotenv()
+        print(os.getenv('HUGGINGFACE_TOKEN'))
+        push_to_hub_fastai(
+            learner=learn,
+            repo_id=REPO_URL,
+            commit_message="Upload FastAI cat vs dog classifier",
+            token=os.getenv('HUGGINGFACE_TOKEN')  # Use token from environment variable
+        )
+        print(f"Model uploaded successfully to: https://huggingface.co/{REPO_URL}")
+    except Exception as e:
+        print(f"Error uploading model: {e}")
+
 def main():
     print("Cat vs Dog Classifier 🐱🐶")
     learn = load_or_train_model()
+
+    if EXPORT_TO_HUGGING_FACE:
+        export_to_hugging_face(learn)
 
     print("\nUsing model to classify custom images.")
     use_model(learn)
