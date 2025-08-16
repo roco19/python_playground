@@ -19,3 +19,6 @@ Thumbs.db
 *.log
 *.tmp
 .ipynb_checkpoints/
+
+# Trainied models
+trained_models/
