@@ -6,23 +6,27 @@ This repository serves as a personal space to explore new ideas, learn features,
 ## 📂 Repository Structure
 
 ```
-python-playground/
+python_playground/
 │
-├── feature-exploration/   # Focused experiments to learn Python concepts
+├── feature_exploration/     # Focused experiments to learn Python concepts
 │   ├── README.md
 │   └── ...
 │
-├── mini-projects/         # Small games and apps
+├── mini_projects/           # Small games and apps
 │   ├── README.md
 │   └── ...
 │
-├── practice-problems/    # Coding challenges and algorithm/data structure practice
+├── practice_problems/       # Coding challenges and algorithm/data structure practice
 │   ├── README.md
 │   └── ...
 │
-├── deep-learning/        # Neural networks, ML experiments, and AI model training
+├── deep_learning/           # Neural networks, ML experiments, and AI model training
 │   ├── README.md
 │   └── ...
 │
-└── README.md              # This file
+├── llm_experiments/         # Experiments with LLM APIs (OpenAI, Gemini, etc.)
+│   ├── README.md
+│   ├── ...
+│
+└── README.md                # Main project description
 ```
